@@ -3,31 +3,51 @@
   emailjs.init("Rm5dStwUIHCF7uK6D");
 })();
 
-
-// ================= SMOOTH FAST SCROLL =================
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-
-    const targetId = this.getAttribute('href');
-    const targetSection = document.querySelector(targetId);
-
-    if (targetSection) {
-      window.scrollTo({
-        top: targetSection.offsetTop - 80, // adjust for navbar height
-        behavior: "smooth"
-      });
-    }
-  });
-});
-
-
-// ================= CONTACT FORM =================
 document.addEventListener("DOMContentLoaded", function () {
 
+  // ================= VARIABLES =================
+  const navLinks = document.querySelectorAll(".nav-links a");
+  const sections = document.querySelectorAll("section");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-links");
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
   const form = document.getElementById("contact-form");
   const statusText = document.getElementById("form-status");
 
+  // ================= MOBILE MENU TOGGLE =================
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", function () {
+      navMenu.classList.toggle("active");
+      menuToggle.classList.toggle("open");
+    });
+  }
+
+  // ================= SMOOTH SCROLL =================
+  navLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute("href");
+      const targetSection = document.querySelector(targetId);
+
+      if (targetSection) {
+        window.scrollTo({
+          top: targetSection.offsetTop - 80,
+          behavior: "smooth"
+        });
+      }
+
+      // Close mobile menu after clicking link
+      if (navMenu) {
+        navMenu.classList.remove("active");
+      }
+      if (menuToggle) {
+        menuToggle.classList.remove("open");
+      }
+    });
+  });
+
+  // ================= CONTACT FORM =================
   if (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -39,13 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
         "service_sfgngej",
         "template_89ayaua",
         this
-      ).then(function () {
+      ).then(() => {
 
         statusText.style.color = "#1fd0ff";
         statusText.innerText = "Message sent successfully ✔";
         form.reset();
 
-      }, function () {
+      }).catch(() => {
 
         statusText.style.color = "#ff6b6b";
         statusText.innerText = "Failed to send message ❌";
@@ -54,70 +74,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ================= SCROLL REVEAL ANIMATION =================
+  // ================= SCROLL REVEAL =================
   const reveals = document.querySelectorAll(".reveal");
 
-  const revealObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
 
-  reveals.forEach(function (el) {
-    revealObserver.observe(el);
-  });
+  reveals.forEach(el => revealObserver.observe(el));
 
-  // ================= ACTIVE NAVBAR ON SCROLL =================
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll(".nav-links a");
-
+  // ================= ACTIVE NAVBAR + SCROLL TOP =================
   window.addEventListener("scroll", function () {
-    let current = "";
 
-    sections.forEach(function (section) {
+    let currentSection = "";
+
+    sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
+      const sectionHeight = section.offsetHeight;
 
-      if (window.scrollY >= sectionTop) {
-        current = section.getAttribute("id");
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        currentSection = section.getAttribute("id");
       }
     });
 
-    navLinks.forEach(function (link) {
+    navLinks.forEach(link => {
       link.classList.remove("active");
 
-      if (link.getAttribute("href") === "#" + current) {
+      if (link.getAttribute("href") === "#" + currentSection) {
         link.classList.add("active");
       }
     });
-  });
 
-  // ================= AESTHETIC SCROLL TO TOP BUTTON =================
-  const scrollTopBtn = document.getElementById("scrollTopBtn");
-
-  if (scrollTopBtn) {
-
-    window.addEventListener("scroll", function () {
+    // Scroll-to-top button visibility
+    if (scrollTopBtn) {
       if (window.scrollY > 300) {
         scrollTopBtn.classList.add("show");
       } else {
         scrollTopBtn.classList.remove("show");
       }
-    });
+    }
 
+  });
+
+  // ================= SCROLL TO TOP =================
+  if (scrollTopBtn) {
     scrollTopBtn.addEventListener("click", function () {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
     });
-
   }
 
 });
-

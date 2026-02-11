@@ -27,9 +27,10 @@ body {
   border-bottom: 1px solid #111;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
 }
 
+/* Logo */
 .logo {
   font-size: 26px;
   font-weight: 700;
@@ -40,6 +41,7 @@ body {
   color: #fff;
 }
 
+/* Desktop Links */
 .nav-links {
   list-style: none;
   display: flex;
@@ -50,12 +52,41 @@ body {
   text-decoration: none;
   color: #aab4c0;
   font-size: 15px;
-  transition: color 0.3s;
+  transition: 0.3s;
 }
 
 .nav-links a:hover {
   color: #1fd0ff;
 }
+
+/* Hamburger (Hidden on Desktop) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 24px;
+  height: 3px;
+  background: #1fd0ff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 
 /* ================= HERO ================= */
 .hero {
@@ -711,8 +742,12 @@ body {
   }
 }
 
-/* Mobile */
+/* ========================= */
+/* 📱 MOBILE RESPONSIVE */
+/* ========================= */
+
 @media (max-width: 768px) {
+
   section {
     padding: 70px 30px !important;
   }
@@ -726,11 +761,41 @@ body {
     height: 260px;
   }
 
-  .nav-links {
-    display: none; /* simple mobile navbar */
+  /* ===== NAVBAR MOBILE ===== */
+
+  .navbar {
+    padding: 0 25px;
   }
 
-  /* Timeline becomes single column */
+  /* Show hamburger */
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Make nav menu dropdown */
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    background: rgba(5, 8, 12, 0.98);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px 0;
+
+    transform: translateY(-120%);
+    transition: transform 0.3s ease;
+  }
+
+  /* When active (JS toggles this) */
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  /* ===== Timeline Single Column ===== */
+
   .timeline::before {
     left: 20px;
   }
@@ -757,9 +822,11 @@ body {
   }
 }
 
+
 section {
   scroll-margin-top: 100px;
 }
+
 
 /* ================= SCROLL ANIMATIONS ================= */
 
