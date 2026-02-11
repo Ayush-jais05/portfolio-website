@@ -761,38 +761,46 @@ body {
     height: 260px;
   }
 
-  /* ===== NAVBAR MOBILE ===== */
+ /* ===== NAVBAR MOBILE ===== */
 
-  .navbar {
-    padding: 0 25px;
-  }
+.navbar {
+  padding: 0 20px;
+  position: relative;
+}
 
-  /* Show hamburger */
-  .menu-toggle {
-    display: flex;
-  }
+/* Show hamburger */
+.menu-toggle {
+  display: flex;
+  z-index: 1100;
+}
 
-  /* Make nav menu dropdown */
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    background: rgba(5, 8, 12, 0.98);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 25px 0;
+/* Dropdown menu */
+.nav-links {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
 
-    transform: translateY(-120%);
-    transition: transform 0.3s ease;
-  }
+  display: flex;              /* FORCE FLEX */
+  flex-direction: column;
+  align-items: center;
 
-  /* When active (JS toggles this) */
-  .nav-links.active {
-    transform: translateY(0);
-  }
+  background: rgba(5, 8, 12, 0.98);
+  backdrop-filter: blur(10px);
+
+  gap: 22px;
+  padding: 30px 0;
+
+  transform: translateY(-150%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+/* When active */
+.nav-links.active {
+  transform: translateY(0);
+}
+
 
   /* ===== Timeline Single Column ===== */
 
