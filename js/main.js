@@ -85,18 +85,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ================= SCROLL REVEAL =================
-    const reveals = document.querySelectorAll(".reveal");
+const reveals = document.querySelectorAll(".reveal");
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("active");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
+const observer = new IntersectionObserver((entries, observer) => {
 
-    reveals.forEach(el => revealObserver.observe(el));
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      observer.unobserve(entry.target);
+    }
+  });
+
+}, {
+  threshold: 0.12,
+  rootMargin: "0px 0px -40px 0px"
+});
+
+reveals.forEach(el => observer.observe(el));
 
     // ================= ACTIVE NAVBAR + SCROLL TOP =================
     window.addEventListener("scroll", function () {
@@ -145,3 +150,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+  const height = document.body.scrollHeight - window.innerHeight;
+  const progress = (scroll / height) * 100;
+  document.getElementById("progress-bar").style.width = progress + "%";
+});
+
