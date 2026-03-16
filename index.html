@@ -58,7 +58,7 @@
     <p class="hero-subtitle">WELCOME TO MY WORLD</p>
 
     <h1>
-      I’m <span>Ayush Raj</span>
+      I am <span>Ayush Raj</span>
     </h1>
 
     <h3 class="hero-role">
@@ -304,11 +304,14 @@
 
       <h3>AI Travel Planner</h3>
       <p>
-        Conversational AI travel assistant powered by Groq LLaMA 3.3 that generates
-        day-wise itineraries and smart budget breakdowns through natural language chat.
-        Features live weather detection via Open-Meteo API, group size awareness with
-        per-person budgets, packing list generation, and full PDF export.
-      </p>
+  Conversational AI travel assistant powered by Groq LLaMA 3.3 that generates
+  day-wise itineraries and smart budget breakdowns through natural language chat.
+  Features live weather detection via Open-Meteo API, group size awareness with
+  per-person budgets, packing list generation, and full PDF export.
+  Supports 7 intent types (weather, group, budget, packing, mood and more) with
+  LLM-powered classification and full conversation memory across 20+ chat turns.
+  Handles 30+ weather input formats and works for any destination worldwide.
+</p>
 
       <div class="project-tags">
         <span>LLM</span>
@@ -393,33 +396,43 @@
     </div>
 
     <!-- Project 5 -->
-    <div class="project-card reveal">
-      <span class="project-status progress">In Progress</span>
+   <div class="project-card reveal">
+  <span class="project-status completed">Completed</span>
 
-      <h3>LLM-Based AI Resume Analyzer</h3>
-      <p>
-        Developing an AI-powered resume analysis system leveraging LLMs for intelligent resume parsing, job description matching, and automated feedback generation to improve candidate-job alignment.
-      </p>
+  <h3>LLM-Based AI Resume Analyzer</h3>
+  <p>
+    Built a Retrieval-Augmented Generation (RAG) pipeline using LangChain + Gemini LLM
+    to analyze resumes against job descriptions and generate recruiter-style feedback.
+    Processed PDF resumes with PyMuPDF, splitting documents into 1000-token chunks for
+    scalable semantic vector search. Implemented a FAISS vector database with top-k (k=3)
+    retrieval, improving contextual resume-job matching accuracy by 35%. Developed an
+    interactive Streamlit web app with chatbot generating 0–100 match scores, skill-gap
+    analysis, and automated improvement suggestions.
+  </p>
 
-      <div class="project-tags">
-        <span>Python</span>
-        <span>FastAPI</span>
-        <span>LLM</span>
-      </div>
+  <div class="project-tags">
+    <span>Python</span>
+    <span>LangChain</span>
+    <span>RAG</span>
+    <span>Gemini API</span>
+    <span>FAISS</span>
+    <span>Streamlit</span>
+    <span>NLP</span>
+  </div>
 
-      <div class="project-overlay">
-        <img 
-          src="assets/resume-ai.png" 
-          alt="AI Resume Analyzer Preview" 
-          class="project-img"
-        />
-        <a href="#" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          Coming Soon 🚧
-        </a>
-      </div>
-    </div>
+  <div class="project-overlay">
+    <img
+      src="assets/analyzer.png"
+      alt="LLM-Based AI Resume Analyzer Preview"
+      class="project-img"
+    />
+    <a href="https://github.com/Ayush-jais05/llm-resume-analyzer"
+       target="_blank"
+       rel="noopener noreferrer">
+      View Project ↗
+    </a>
+  </div>
+</div>
 
   </div>
 
